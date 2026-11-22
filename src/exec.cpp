@@ -1,4 +1,5 @@
 #include "exec.hpp"
+#include <print>
 using namespace std;
 
 unique_ptr<char*[]> vec_to_args(vector<string>& tokens){
