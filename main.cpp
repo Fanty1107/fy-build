@@ -2,6 +2,8 @@
 #include "tokenizer.hpp"
 #include "file_utils.hpp"
 
+using namespace std;
+
 int main(void){
     auto paths = search_build();
     if(paths){
@@ -9,7 +11,9 @@ int main(void){
     auto content = read_file(build_file);
         if(content){
             vector<string> tokens = tokenizer_cmd(*content);
-            exec_command(tokens);
+            if(!exec_command(tokens)){
+                println(stderr,"Failed on exec_command");
+            }
         }else if(content.error() == KindError::IO_FILE){
             println(stderr, "Unable to read a file");
         }else if(content.error() == KindError::EMPTY_BUF){

@@ -3,6 +3,7 @@
 namespace fs = std::filesystem;
 using namespace std;
 
+//TODO: make a parser for structed file.build, refactor all this
 auto read_file(fs::path path) -> expected<string, KindError>{
     fstream file(path);
     if(!file.is_open()){
