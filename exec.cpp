@@ -1,6 +1,15 @@
 #include "exec.hpp"
 using namespace std;
 
+unique_ptr<char*[]> vec_to_args(vector<string>& tokens){
+    unique_ptr<char*[]> args = make_unique<char*[]>(tokens.size() + 1);
+    for(size_t i = 0; i < tokens.size(); ++i){
+        args[i] = tokens[i].data();
+    }
+    args[tokens.size()] = nullptr;
+
+    return args;
+}
 bool exec_command(vector<string>& tokens){
     if(tokens.empty()){
         println(stderr, "No cmd found in file");

@@ -10,7 +10,7 @@ int main(void){
     filesystem::path build_file = define_build(*paths, BUILD_TYPE::DEBUG);
     auto content = read_file(build_file);
         if(content){
-            vector<string> tokens = tokenizer_cmd(*content);
+            vector<string> tokens = tokenizer_cmd(*content, lines_number_file(build_file));
             if(!exec_command(tokens)){
                 println(stderr,"Failed on exec_command");
             }

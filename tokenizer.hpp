@@ -10,6 +10,5 @@
 #include <memory>
 
 
-std::vector<std::string> tokenizer_cmd(std::string cmd);
-std::unique_ptr<char*[]> vec_to_args(std::vector<std::string>& tokens);
+std::vector<std::string> tokenizer_cmd(const std::string&, size_t);
 #endif//TOKENIZER_HPP
