@@ -2,19 +2,22 @@
 #include "tokenizer.hpp"
 #include "file_utils.hpp"
 
-int main(int argc, char **argv){
-    if(argc > 1){
-        auto content = read_file(argv[1]);
+int main(void){
+    auto paths = search_build();
+    if(paths){
+    filesystem::path build_file = define_build(*paths, BUILD_TYPE::DEBUG);
+    auto content = read_file(build_file);
         if(content){
-            std::vector<std::string> tokens = tokenizer_cmd(*content);
+            vector<string> tokens = tokenizer_cmd(*content);
             exec_command(tokens);
         }else if(content.error() == KindError::IO_FILE){
-            std::println(stderr, "Unable to read a file");
+            println(stderr, "Unable to read a file");
         }else if(content.error() == KindError::EMPTY_BUF){
-            std::println(stderr, "File readed but the read buffer is empty");
+            println(stderr, "File readed but the read buffer is empty");
         }
-    }else{
-        std::println(stderr,"Enter args pls");
+    }
+    else if(paths.error() == KindError::EMPTY_BUF){
+        println(stderr, "No such .build files");
     }
     return 0;
 }
