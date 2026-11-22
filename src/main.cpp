@@ -1,6 +1,7 @@
 #include "exec.hpp"
 #include "tokenizer.hpp"
 #include "file_utils.hpp"
+#include "parser.hpp"
 
 using namespace std;
 
@@ -10,6 +11,8 @@ int main(void){
     filesystem::path build_file = define_build(*paths, BUILD_TYPE::DEBUG);
     auto content = read_file(build_file);
         if(content){
+            map<string, string> m = into_map(*content);
+            print_map(m);
             vector<string> tokens = tokenizer_cmd(*content, lines_number_file(build_file));
             if(!exec_command(tokens)){
                 println(stderr,"Failed on exec_command");

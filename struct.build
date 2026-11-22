@@ -1,0 +1,11 @@
+compiler:clang++
+c_flags:-Wall -Wextra -std=c++23 -Wpedantic
+ld_flags:
+debug_flags:-g -O0 -fsanitize=address
+release_flags:-O3 -DNDEBUG
+src_dir:
+build_dir: build
+bin_dir:
+lib:
+include:-Iinclude
+target:main

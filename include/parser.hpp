@@ -1,14 +1,11 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
 #include <string>
+#include <string_view>
+#include <map>
 using namespace std;
 
-struct Parser{
-    string args;    
-    size_t lines;
-
-    string parse_buffer(string& buffer);
-    string format_cmd(string& cmd);
-};
-
+map<string, string> into_map(string& buf);
+inline string trim_copy(string_view sv);
+void print_map(map<string, string>& m);
 #endif//PARSER_HPP
