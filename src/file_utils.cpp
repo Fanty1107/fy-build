@@ -1,4 +1,6 @@
 #include "file_utils.hpp"
+#include <print>
+#include <fstream>
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -60,4 +62,27 @@ fs::path define_build(const vector<fs::path>& build_files, BUILD_TYPE b_type){
 }
     return build_files[0];
 }
+vector<string> search_cpp_files(fs::path src_dir){
+    std::vector<std::string> files_cpp;
 
+    fs::path target_dir = src_dir.empty()
+        ? fs::current_path()
+        : (fs::current_path() / src_dir);
+
+    if (!fs::exists(target_dir) || !fs::is_directory(target_dir)) {
+        return files_cpp;
+    }
+
+    for (const auto& entry : fs::recursive_directory_iterator(target_dir)) {
+        if (!entry.is_regular_file()) {
+            continue;
+        }
+
+        const auto ext = entry.path().extension();
+        if (ext == ".cpp" || ext == ".cc") {
+            files_cpp.push_back(entry.path().string());
+        }
+    }
+
+    return files_cpp;
+}

@@ -2,4 +2,6 @@ a.out
 debug.build
 prod.build
 build/
+test
+example.txt
 main

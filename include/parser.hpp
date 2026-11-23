@@ -9,5 +9,6 @@ using namespace std;
 map<string, string> into_map(string& buf);
 inline string trim_copy(string_view sv);
 void print_map(map<string, string>& m);
-vector<string> sort_map(map<string, string>);
+vector<string> debug_cmd(map<string, string>& m);
+vector<string> linking_cmd(map<string, string>&);
 #endif//PARSER_HPP

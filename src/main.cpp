@@ -1,7 +1,7 @@
 #include "exec.hpp"
-#include "tokenizer.hpp"
 #include "file_utils.hpp"
 #include "parser.hpp"
+#include <print>
 
 using namespace std;
 
@@ -12,9 +12,8 @@ int main(void){
     auto content = read_file(build_file);
         if(content){
             map<string, string> m = into_map(*content);
-            print_map(m);
-            vector<string> tokens = tokenizer_cmd(*content, lines_number_file(build_file));
-            if(!exec_command(tokens)){
+            vector<string> cmd = debug_cmd(m);
+            if(!exec_command(cmd)){
                 println(stderr,"Failed on exec_command");
             }
         }else if(content.error() == KindError::IO_FILE){
