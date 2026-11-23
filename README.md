@@ -9,7 +9,7 @@
 
 - See the example .build in struct.build in the repo
 
-- Do not expected a arg for running you only need .build and the binary
+- The bin do not expected a arg for running you only need .build and the binary
 
 - Detects all cpp and cc files in your specified dir and includes
 
