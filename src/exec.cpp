@@ -11,6 +11,12 @@ unique_ptr<char*[]> vec_to_args(vector<string>& tokens){
 
     return args;
 }
+void print_cmd(vector<string>& args){
+    for(const auto& arg : args){
+        print(stdout, "{} ", arg);
+    }
+    print("\n");
+}
 bool exec_command(vector<string>& tokens){
     if(tokens.empty()){
         println(stderr, "No cmd found in file");
@@ -37,6 +43,7 @@ bool exec_command(vector<string>& tokens){
         return false;
     }
     if (WIFEXITED(status)) {
+        print_cmd(tokens);
         println(stdout, "Exit cmd code: {}", WEXITSTATUS(status));
     } else if (WIFSIGNALED(status)) {
         println(stdout, "Killed by signal: {}", WTERMSIG(status));

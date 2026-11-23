@@ -1,5 +1,5 @@
 # Name of the final executable
-TARGET = main
+TARGET = cbuild
 
 # Compiler and Flags
 CXX      = clang++
