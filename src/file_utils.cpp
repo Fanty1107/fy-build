@@ -11,7 +11,7 @@ size_t lines_number_file(fs::path file_path){
         size_t bytes = fs::file_size(file_path);
         return bytes;
     }else{
-        println(stderr, "Unable to determinate the file size");
+        println(stderr, "[LOG]: Unable to determinate the file size");
         return 70;
     }
     return 70;

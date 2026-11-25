@@ -13,40 +13,40 @@ unique_ptr<char*[]> vec_to_args(vector<string>& tokens){
 }
 void print_cmd(vector<string>& args){
     for(const auto& arg : args){
-        print(stdout, "{} ", arg);
+        print(stdout, "[LOG]: {} ", arg);
     }
     print("\n");
 }
 bool exec_command(vector<string>& tokens){
     if(tokens.empty()){
-        println(stderr, "No cmd found in file");
+        println(stderr, "[ERROR]: No cmd found in file");
         return false;
     }
     pid_t pid = fork();
     if(pid == -1){
-        println(stderr, "Failed in fork");
+        println(stderr, "[ERROR]: Failed in fork");
         return false;
     }
     if(pid == 0){
         auto args = vec_to_args(tokens);
         if(args[0] == nullptr || *args[0] == '\0'){
-            println(stderr, "Invalid Command");
+            println(stderr, "[ERROR]: Invalid Command");
             _exit(127);
         }
         execvp(args[0], args.get());
-        println(stderr, "Cmd failed");
+        println(stderr, "[ERROR]: Cmd failed");
         _exit(127);
     }
     int status = 0;
     if (waitpid(pid, &status, 0) == -1) {
-        println(stderr, "waitpid failed");
+        println(stderr, "[ERROR]: waitpid failed");
         return false;
     }
     if (WIFEXITED(status)) {
         print_cmd(tokens);
-        println(stdout, "Exit cmd code: {}", WEXITSTATUS(status));
+        println(stdout, "[LOG]: Exit cmd code: {}", WEXITSTATUS(status));
     } else if (WIFSIGNALED(status)) {
-        println(stdout, "Killed by signal: {}", WTERMSIG(status));
+        println(stdout, "[LOG]: Killed by signal: {}", WTERMSIG(status));
     }
     return true;
 }

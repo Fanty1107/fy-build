@@ -17,13 +17,13 @@ int main(void){
                 println(stderr,"Failed on exec_command");
             }
         }else if(content.error() == KindError::IO_FILE){
-            println(stderr, "Unable to read a file");
+            println(stderr, "[ERROR]: Unable to read a file");
         }else if(content.error() == KindError::EMPTY_BUF){
-            println(stderr, "File readed but the read buffer is empty");
+            println(stderr, "[ERROR]: File readed but the read buffer is empty");
         }
     }
     else if(paths.error() == KindError::EMPTY_BUF){
-        println(stderr, "No such .build files");
+        println(stderr, "[ERROR]: No such .build files");
     }
     return 0;
 }

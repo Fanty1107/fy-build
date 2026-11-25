@@ -8,4 +8,4 @@ build_dir: build
 bin_dir:
 lib:
 include:-Iinclude
-target:test
+target:cbuild
